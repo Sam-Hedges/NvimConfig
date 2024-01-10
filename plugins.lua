@@ -96,7 +96,25 @@ local plugins = {
             filters = {
                 custom = { "meta" },
             },
+            view = {
+                adaptive_size = true,
+            },
+            respect_buf_cwd = true,
+            update_focused_file = {
+                enable = true,
+                update_root = true,
+            },
         },
+    },
+    {
+        "ahmedkhalf/project.nvim",
+        lazy = false,
+        config = function()
+            require("project_nvim").setup {
+                manual_mode = true,
+            }
+            require("telescope").load_extension "projects"
+        end,
     },
     {
         "nvimdev/dashboard-nvim",
@@ -129,6 +147,18 @@ local plugins = {
                             key = "d",
                         },
                     },
+                    packages = { enable = true }, -- show how many plugins neovim loaded
+                    -- limit how many projects list, action when you press key or enter it will run this action.
+                    -- action can be a functino type, e.g.
+                    -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
+                    project = {
+                        enable = true,
+                        limit = 8,
+                        icon = " ",
+                        label = "Projects",
+                        action = "Telescope projects",
+                    },
+                    mru = { limit = 5, icon = " ", label = "Files", cwd_only = false },
                 },
             }
         end,
