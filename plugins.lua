@@ -102,7 +102,7 @@ local plugins = {
             respect_buf_cwd = true,
             update_focused_file = {
                 enable = true,
-                update_root = true,
+                update_root = false,
             },
         },
     },
@@ -112,6 +112,7 @@ local plugins = {
         config = function()
             require("project_nvim").setup {
                 manual_mode = true,
+                patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "CMakeLists.txt" },
             }
             require("telescope").load_extension "projects"
         end,
@@ -163,6 +164,13 @@ local plugins = {
             }
         end,
         requires = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        opts = {
+            show_current_context = true,
+            show_current_context_start = false,
+        },
     },
 }
 
